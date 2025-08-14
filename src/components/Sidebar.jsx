@@ -1,6 +1,6 @@
 // src/components/Sidebar.jsx
 import { Link, useNavigate } from "react-router-dom";
-import { FaHome, FaStar, FaSignOutAlt, FaList } from "react-icons/fa";
+import { FaHome, FaList } from "react-icons/fa";
 import { useContext, useEffect, useState } from "react";
 import { tokenContext } from "../context/CreateContext";
 
@@ -56,19 +56,19 @@ export default function Sidebar({ onClose }) {
         )}
       </div>
 
-      <ul className="nav nav-pills flex-column mb-auto gap-2">
-        <li>
-          <Link to="/" className="nav-link text-dark" onClick={onClose}>
-            <FaHome /> Home
+      <div className=" ">
+        <div className="mb-2">
+          <Link to="/" className="text-decoration-none fw-bold text-light " onClick={onClose}>
+            <FaHome className="me-2"/> Home
           </Link>
-        </li>
-        <li>
-          <Link to="/book-list" className="nav-link text-dark" onClick={onClose}>
-            <FaList /> Book
+        </div>
+        <div>
+          <Link to="/book-list" className="text-decoration-none fw-bold text-light" onClick={onClose}>
+            <FaList className="me-2" /> Book
           </Link>
-        </li>
+        </div>
       
-      </ul>
+      </div>
     </div>
   );
 }
