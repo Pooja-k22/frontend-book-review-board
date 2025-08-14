@@ -76,7 +76,7 @@ export default function Home() {
             <FaBars />
           </button>
 
-          {/* Hero Section */}
+          {/* image Section */}
           <div
             className="text-white p-4 rounded d-flex flex-wrap justify-content-between align-items-center mb-4"
             style={{
@@ -95,9 +95,7 @@ export default function Home() {
                 style={{ maxWidth: "300px" }}
               />
             </div>
-            <div className="mt-3 mt-md-0">
-              <FaBell size={24} />
-            </div>
+            
           </div>
 
           {/* Popular Books */}

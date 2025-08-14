@@ -1,6 +1,6 @@
 // src/components/Sidebar.jsx
 import { Link, useNavigate } from "react-router-dom";
-import { FaHome, FaList } from "react-icons/fa";
+import { FaBook, FaHome, FaList } from "react-icons/fa";
 import { useContext, useEffect, useState } from "react";
 import { tokenContext } from "../context/CreateContext";
 
@@ -36,6 +36,7 @@ export default function Sidebar({ onClose }) {
       </button>
 
       <div className="text-center mb-4">
+        <h4 className="text-white fw-bold  mb-5"> <FaBook className="me-2" /> BOOKVERSE</h4>
         <img
           src="https://icons.veryicon.com/png/o/miscellaneous/user-avatar/user-avatar-female-9.png"
           alt="profile"
@@ -56,14 +57,14 @@ export default function Sidebar({ onClose }) {
         )}
       </div>
 
-      <div className=" ">
+      <div className=" mb-3 ">
         <div className="mb-2">
-          <Link to="/" className="text-decoration-none fw-bold text-light " onClick={onClose}>
+          <Link to="/" className="text-decoration-none  text-light " onClick={onClose}>
             <FaHome className="me-2"/> Home
           </Link>
         </div>
         <div>
-          <Link to="/book-list" className="text-decoration-none fw-bold text-light" onClick={onClose}>
+          <Link to="/book-list" className="text-decoration-none  text-light" onClick={onClose}>
             <FaList className="me-2" /> Book
           </Link>
         </div>

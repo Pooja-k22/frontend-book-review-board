@@ -103,7 +103,7 @@ const {token}= useContext(tokenContext)
                     by {book.author}
                   </Card.Subtitle>
                   <p>{book.description}</p>
-                  <p>⭐ {book.rating} / 5</p>
+                  <p>⭐5</p>
                   {token && <button  className="me-auto py-2 px-3 bt" onClick={() => setShowModal(true)}>
                     Add Review
                   </button>}
