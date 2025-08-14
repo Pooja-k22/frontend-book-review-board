@@ -33,13 +33,10 @@ export const addReviewApi = async (reqBody, reqHeader) => {
   return await commonApi("POST", `${serverUrl}/add-review`, reqBody, reqHeader);
 };
 
-// job get reviews
+//  get reviews
 export const getReviewApi = async (id) => {
   return await commonApi("GET", `${serverUrl}/get-review/${id}`);
 };
 
-// get home job
-export const getHomeJob = async () => {
-  return await commonApi("GET", `${serverUrl}/latest-jobs`);
-};
+
 
