@@ -46,7 +46,7 @@ function AddBook({ show, handleClose }) {
 
   return (
     <Modal show={show} onHide={handleClose} centered>
-      <Modal.Header className="bg-primary text-white">
+      <Modal.Header className=" d-flex justify-content-between align-content-center text-white" style={{backgroundColor:"rgb(45, 26, 4)"}}>
         <Modal.Title>
           <FaBook className="me-2" /> Add New Book
         </Modal.Title>
@@ -61,11 +61,12 @@ function AddBook({ show, handleClose }) {
       </Modal.Header>
       <Modal.Body>
         <Form onSubmit={addBook}>
-          <Form.Group className="mb-3">
-            <Form.Label>Book Title</Form.Label>
-            <Form.Control
+          <div className="my-3">
+            
+            <input
               type="text"
               placeholder="Enter book title"
+              className="form-control "
               name="title"
               value={formData.title}
               onChange={(e) =>
@@ -73,57 +74,60 @@ function AddBook({ show, handleClose }) {
               }
               required
             />
-          </Form.Group>
+          </div>
 
-          <Form.Group className="mb-3">
-            <Form.Label>Author</Form.Label>
-            <Form.Control
+          <div className="mb-3">
+          
+            <input
               type="text"
               placeholder="Enter author name"
               name="author"
+               className="form-control "
               value={formData.author}
               onChange={(e) =>
                 setFormData({ ...formData, author: e.target.value })
               }
               required
             />
-          </Form.Group>
+          </div>
 
-          <Form.Group className="mb-3">
-            <Form.Label>Description</Form.Label>
-            <Form.Control
+          <div className="mb-3">
+           
+            <textarea
               as="textarea"
               rows={3}
               placeholder="Enter book description"
               name="description"
+               className="form-control "
               value={formData.description}
               onChange={(e) =>
                 setFormData({ ...formData, description: e.target.value })
               }
               required
             />
-          </Form.Group>
+          </div>
 
-          <Form.Group className="mb-3">
-            <Form.Label>Image URL</Form.Label>
-            <Form.Control
+          <div className="mb-3">
+           
+            <input
               type="url"
               placeholder="Paste book cover image URL"
               name="image"
+               className="form-control "
               value={formData.image}
               onChange={(e) =>
                 setFormData({ ...formData, image: e.target.value })
               }
             />
-          </Form.Group>
+          </div>
 
-          <div className="text-end">
+          <div className="text-end mt-5">
             <Button variant="secondary" onClick={handleClose} className="me-2">
               Cancel
             </Button>
-            <Button variant="primary" type="submit">
+            <button  className=" py-2 px-3 bt" type="submit">
               Add Book
-            </Button>
+            </button>
           </div>
         </Form>
       </Modal.Body>

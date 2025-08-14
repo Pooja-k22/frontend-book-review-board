@@ -68,9 +68,9 @@ const AddReview = ({ show, handleClose ,bookId}) => {
         <Button variant="secondary" onClick={handleClose}>
           Cancel
         </Button>
-        <Button variant="primary" onClick={onSubmit}>
+        <button  className=" py-2 px-3 bt" onClick={onSubmit}>
           Submit Review
-        </Button>
+        </button>
       </Modal.Footer>
     </Modal>
   );
