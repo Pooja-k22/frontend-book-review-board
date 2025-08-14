@@ -25,7 +25,7 @@ A web app for browsing, reviewing, and adding books.
 
 4. **Open in browser**
    Visit [http://localhost:5173](http://localhost:5173)
-   Live link []()
+   Live link [https://frontend-book-review-board.vercel.app](https://frontend-book-review-board.vercel.app)
 
 ---
 
