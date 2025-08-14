@@ -6,46 +6,63 @@ import { loginApi } from "../services/allApi";
 import { tokenContext } from "../context/CreateContext";
 
 function Login() {
-  const {setToken}= useContext(tokenContext)
+  const { setToken } = useContext(tokenContext);
   const navigate = useNavigate();
   const [userD, setuserD] = useState({
     email: "",
     password: "",
   });
 
-  // api call register
+  const [errors, setErrors] = useState({}); // to store validation errors
+
+  const validate = () => {
+    const newErrors = {};
+
+    if (!userD.email.trim()) {
+      newErrors.email = "Email is required";
+    } else if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(userD.email)) {
+      newErrors.email = "Invalid email format";
+    }
+
+    if (!userD.password) {
+      newErrors.password = "Password is required";
+    } else if (userD.password.length < 6) {
+      newErrors.password = "Password must be at least 6 characters";
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0;
+  };
+
   const login = async (e) => {
     e.preventDefault();
-    const { email, password } = userD;
-    if (!email | !password) {
-      alert("please fill all field");
-    } else {
-      const result = await loginApi({ email, password });
+    if (!validate()) return;
+
+    try {
+      const result = await loginApi(userD);
       console.log(result.data);
 
-      if (result.status == 200) {
-        alert("login successfull");
+      if (result.status === 200) {
+        alert("Login successful");
         localStorage.setItem(
           "existingUser",
           JSON.stringify(result.data.existingUser)
         );
         localStorage.setItem("token", result.data.token);
-        setToken(result.data.token)
+        setToken(result.data.token);
         navigate("/");
-      } else if (result.status == 401 || result.status == 409) {
+      } else if (result.status === 401 || result.status === 409) {
         alert(result.response.data);
-        setuserD({
-          email: "",
-          password: "",
-        });
+        setuserD({ email: "", password: "" });
       } else {
         alert("Something went wrong");
-        setuserD({
-          email: "",
-          password: "",
-        });}
+        setuserD({ email: "", password: "" });
+      }
+    } catch (error) {
+      alert("Server error");
     }
   };
+
   return (
     <div
       className="d-flex justify-content-center align-items-center vh-100"
@@ -76,11 +93,12 @@ function Login() {
                 placeholder="Email"
                 className="border-0 shadow-none"
                 value={userD.email}
-                onChange={(e) => {
-                  setuserD({ ...userD, email: e.target.value });
-                }}
+                onChange={(e) =>
+                  setuserD({ ...userD, email: e.target.value })
+                }
               />
             </div>
+            {errors.email && <small className="text-danger">{errors.email}</small>}
           </Form.Group>
 
           <Form.Group className="mb-3">
@@ -91,11 +109,14 @@ function Login() {
                 placeholder="Password"
                 className="border-0 shadow-none"
                 value={userD.password}
-                onChange={(e) => {
-                  setuserD({ ...userD, password: e.target.value });
-                }}
+                onChange={(e) =>
+                  setuserD({ ...userD, password: e.target.value })
+                }
               />
             </div>
+            {errors.password && (
+              <small className="text-danger">{errors.password}</small>
+            )}
           </Form.Group>
 
           <Button variant="primary" type="submit" className="w-100 fw-bold">

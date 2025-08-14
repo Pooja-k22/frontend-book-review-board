@@ -12,22 +12,46 @@ function Register() {
     password: "",
   });
 
-  // api call register
+  const [errors, setErrors] = useState({}); 
+
+  // validation function
+  const validate = () => {
+    const newErrors = {};
+
+    if (!userD.name.trim()) newErrors.name = "Name is required";
+
+    if (!userD.email.trim()) {
+      newErrors.email = "Email is required";
+    } else if (!/^[a-zA-Z0-9._%+-]+@[a-zA-Z0-9.-]+\.[a-zA-Z]{2,}$/.test(userD.email)) {
+      newErrors.email = "Invalid email format";
+    }
+
+    if (!userD.password) {
+      newErrors.password = "Password is required";
+    } else if (userD.password.length < 6) {
+      newErrors.password = "Password must be at least 6 characters";
+    }
+
+    setErrors(newErrors);
+    return Object.keys(newErrors).length === 0; 
+  };
+
   const register = async (e) => {
-    e.preventDefault()
-    const { name, email, password } = userD;
-    if (!name | !email | !password) {
-      alert("please fill all field");
-    } else {
-      const result = await registerApi({ name, email, password });
-      console.log(result.data);
-      
-      if (result.status == 200) {
-        alert("register successfull");
+    e.preventDefault();
+
+    if (!validate()) return; 
+
+    try {
+      const result = await registerApi(userD);
+
+      if (result.status === 200) {
+        alert("Registration successful");
         navigate("/login");
       } else {
-        alert("something went wrong");
+        alert("Something went wrong");
       }
+    } catch (error) {
+      alert("Server error");
     }
   };
 
@@ -61,11 +85,12 @@ function Register() {
                 placeholder="Full Name"
                 className="border-0 shadow-none"
                 value={userD.name}
-                onChange={(e) => {
-                  setuserD({ ...userD, name: e.target.value });
-                }}
+                onChange={(e) =>
+                  setuserD({ ...userD, name: e.target.value })
+                }
               />
             </div>
+            {errors.name && <small className="text-danger">{errors.name}</small>}
           </Form.Group>
 
           <Form.Group className="mb-3">
@@ -76,11 +101,12 @@ function Register() {
                 placeholder="Email"
                 className="border-0 shadow-none"
                 value={userD.email}
-                onChange={(e) => {
-                  setuserD({ ...userD, email: e.target.value });
-                }}
+                onChange={(e) =>
+                  setuserD({ ...userD, email: e.target.value })
+                }
               />
             </div>
+            {errors.email && <small className="text-danger">{errors.email}</small>}
           </Form.Group>
 
           <Form.Group className="mb-3">
@@ -91,26 +117,15 @@ function Register() {
                 placeholder="Password"
                 className="border-0 shadow-none"
                 value={userD.password}
-                onChange={(e) => {
-                  setuserD({ ...userD, password: e.target.value });
-                }}
+                onChange={(e) =>
+                  setuserD({ ...userD, password: e.target.value })
+                }
               />
             </div>
+            {errors.password && (
+              <small className="text-danger">{errors.password}</small>
+            )}
           </Form.Group>
-
-          {/* <Form.Group className="mb-3">
-            <div className="d-flex align-items-center bg-white rounded px-2">
-              <FaLock className="me-2 text-muted" />
-              <Form.Control
-                type="password"
-                placeholder="Confirm Password"
-                className="border-0 shadow-none"
-                 value={userD.Cpassword}
-                onClick={(e)=>{setuserD({...userD,Cpassword:e.target.value})
-                }}
-              />
-            </div>
-          </Form.Group> */}
 
           <Button variant="success" type="submit" className="w-100 fw-bold">
             Register
@@ -121,7 +136,7 @@ function Register() {
           Already have an account?{" "}
           <Link
             to="/login"
-            className=" fw-bold"
+            className="fw-bold"
             style={{ color: "rgb(254, 203, 36)" }}
           >
             Login
