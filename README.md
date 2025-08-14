@@ -9,7 +9,7 @@ A web app for browsing, reviewing, and adding books.
 
 1. **Clone the repository**
    ```sh
-   git clone https://github.com/yourusername/fontend-book-review.git
+   git clone https://github.com/Pooja-k22/fontend-book-review.git
    cd fontend-book-review
    ```
 
@@ -25,6 +25,7 @@ A web app for browsing, reviewing, and adding books.
 
 4. **Open in browser**
    Visit [http://localhost:5173](http://localhost:5173)
+   Live link []()
 
 ---
 
