@@ -2,14 +2,13 @@ import React from "react";
 import { Navbar, Nav } from "react-bootstrap";
 import { FaBars } from "react-icons/fa";
 import { Link, useNavigate } from "react-router-dom";
-import { useContext, useEffect, useState } from "react";
+import { useContext, useState } from "react";
 import { tokenContext } from "../context/CreateContext";
 
 function Header() {
   const [showSidebar, setShowSidebar] = useState(false);
 
   const { token, setToken } = useContext(tokenContext);
-  const [userName, setUserName] = useState("");
   const navigate = useNavigate();
 
   const logout = () => {
@@ -17,13 +16,10 @@ function Header() {
     localStorage.removeItem("token");
     setToken("");
     navigate("/");
-    if (onClose) onClose();
+  
   };
 
-  useEffect(() => {
-    const user = JSON.parse(localStorage.getItem("existingUser"));
-    if (user) setUserName(user.name);
-  }, [token]);
+
   return (
     <>
       {/* Header */}
