@@ -43,9 +43,9 @@ function Header() {
               Login
             </Link>
           ) : (
-            <Link onClick={logout} className="text-light text-decoration-none">
+            <p onClick={logout} className="text-light text-decoration-none">
               Logout
-            </Link>
+            </p>
           )}
         </Nav>
         <Nav-End className=" d-md-none">
@@ -61,9 +61,9 @@ function Header() {
               🔸Login
             </Link>
           ) : (
-            <Link onClick={logout} className="text-light text-decoration-none">
+            <p onClick={logout} className="text-light text-decoration-none">
               🔸Logout
-            </Link>
+            </p>
           )}
         </div>
       )}
