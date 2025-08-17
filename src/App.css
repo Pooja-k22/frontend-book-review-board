@@ -1,15 +1,36 @@
-.des{
-    background-color: rgb(246, 246, 246);
+.des {
+  background-color: rgb(246, 246, 246);
 }
-.bt{
-    background-color: rgb(45, 26, 4);
-    border-radius: 9px;
-    color: white;
-    border: 0;
+.bt {
+  background-color: rgb(45, 26, 4);
+  border-radius: 9px;
+  color: white;
+  border: 0;
 }
-.bar{
-   
-       background-color: rgb(143, 105, 0),
-       
-     
+
+.head {
+  background-color: rgb(24, 14, 1);
+}
+.qoute {
+  background-color: rgb(255, 246, 160);
+}
+.card {
+  background-color: #ffebc8;
+}
+.book-card {
+  transition: transform 0.3s ease;
+}
+.book-card:hover {
+  transform: translateY(-8px);
+}
+.how-card {
+  background: linear-gradient(135deg, #fff9e6, #fff);
+  transition: transform 0.3s ease, box-shadow 0.3s ease;
+}
+.how-card:hover {
+  transform: scale(1.05);
+}
+.review-card {
+  background: #fff;
+  border-left: 5px solid #f5c542;
 }

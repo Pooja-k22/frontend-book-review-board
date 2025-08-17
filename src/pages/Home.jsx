@@ -1,130 +1,109 @@
-import { useState } from "react";
-import { FaBell, FaBars } from "react-icons/fa";
-import Sidebar from "../components/Sidebar";
+import React from "react";
+import { Container, Row, Col, Card } from "react-bootstrap";
+import Header from "../components/Header";
+import Footer from "../components/Footer";
 
-export default function Home() {
-  const [showSidebar, setShowSidebar] = useState(false);
+function Home() {
   const books = [
     {
       title: "It Ends with Us",
-
       image:
         "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1688011813i/27362503.jpg",
     },
     {
       title: "Ikigai",
-
       image:
         "https://m.media-amazon.com/images/I/71cRwWclCvL._UF1000,1000_QL80_.jpg",
     },
     {
       title: "Yellowface",
-
       image:
         "https://m.media-amazon.com/images/I/61GKZcxOP7L._UF1000,1000_QL80_.jpg",
     },
     {
       title: "Funny story",
-
       image:
         "https://images-na.ssl-images-amazon.com/images/S/compressed.photo.goodreads.com/books/1691777485i/194802722.jpg",
     },
     {
       title: "Think Like a Monk",
-
       image: "https://m.media-amazon.com/images/I/81GlTN6QQrL.jpg",
     },
-    {title:"Ichogo Ichie",
-      image:"https://assets.isu.pub/document-structure/250117150747-3ad6b4c6b22ebc1dce3548670e1b50d9/v1/778467e65ed81d241f08eeb63d9122fc.jpeg"
-    }
+    {
+      title: "Ichogo Ichie",
+      image:
+        "https://assets.isu.pub/document-structure/250117150747-3ad6b4c6b22ebc1dce3548670e1b50d9/v1/778467e65ed81d241f08eeb63d9122fc.jpeg",
+    },
   ];
 
   return (
-    <div className="container-fluid">
-      <div className="row">
-        {/* Sidebar - visible on md+ screens */}
-        <div
-          className="col-md-3 col-lg-2 d-none d-md-block p-0"
-          style={{
-            backgroundColor: "rgb(143, 105, 0)",
-            minHeight: "100vh",
-          }}
-        >
-          <Sidebar />
-        </div>
+    <div>
+      
+        <Header />
+      
+      {/* Quotes Section */}
+      <section className="text-center py-2 qoute">
+        <blockquote className="fst-italic fs-5">
+          "A room without books is like a body without a soul."
+        </blockquote>
+      </section>
 
-        {/* Sidebar Overlay for mobile */}
-        {showSidebar && (
-          <div
-            className="position-fixed top-0 start-0 w-75 h-100 d-md-none"
-            style={{
-              backgroundColor: "rgb(143, 105, 0)",
-              zIndex: 1050,
-            }}
-          >
-            <Sidebar onClose={() => setShowSidebar(false)} />
-          </div>
-        )}
+      {/* Banner */}
+      <section>
+        <img
+          src="https://www.shutterstock.com/image-photo/various-old-books-on-shelf-260nw-557138818.jpg"
+          alt="banner"
+          className="w-100"
+          style={{ height: "300px", objectFit: "cover" }}
+        />
+      </section>
 
-        {/* Main Content */}
-        <div className="col-md-9 col-lg-10">
-          {/* Mobile Menu Button */}
-          <button
-            className="btn btn-outline-dark d-md-none my-3"
-            onClick={() => setShowSidebar(true)}
-          >
-            <FaBars />
-          </button>
-
-          {/* image Section */}
-          <div
-            className="text-white p-4 rounded d-flex flex-wrap justify-content-between align-items-center mb-4"
-            style={{
-              backgroundImage: `url("https://static.vecteezy.com/system/resources/thumbnails/030/503/504/small_2x/lots-of-books-on-the-table-in-front-of-the-library-shelves-generative-ai-photo.jpg")`,
-              backgroundSize: "cover",
-              backgroundPosition: "center",
-              height: "300px",
-            }}
-          >
-            <div>
-              <h2 className="fw-bold">Find Your Next Book to Review</h2>
-              <input
-                type="text"
-                placeholder="Search for a book"
-                className="form-control mt-2"
-                style={{ maxWidth: "300px" }}
-              />
+      {/* Popular Books */}
+      <section className="my-5 mx-5">
+        <h4 className="mb-3 fw-bold text-center">Popular Books</h4>
+        <div className="row g-3 flex-nowrap overflow-auto">
+          {books.map((book, index) => (
+            <div key={index} className="col-6 col-sm-4 col-md-3 col-lg-2">
+              <div className="card h-100 shadow-md border rounded-4 overflow-hidden book-card">
+                <img
+                  src={book.image}
+                  alt={book.title}
+                  className="card-img-top"
+                  style={{ height: "250px", objectFit: "cover" }}
+                />
+                <div className="card-body text-center">
+                  <h6 className="card-title fw-bold">{book.title}</h6>
+                </div>
+              </div>
             </div>
-            
-          </div>
-
-          {/* Popular Books */}
-          <section>
-            <h4 className="mb-3">Popular</h4>
-            <div className="row g-3  ">
-            
-                {books.map((book) => (
-                    <div className="col-12 col-sm-4 col-md-3 col-lg-2">
-                  <div className="card h-100 shadow">
-                    <img
-                      src={book.image}
-                      alt="book.title"
-                      className="card-img-top rounded-b-5"
-                      style={{ height: "300px", objectFit: "cover" }}
-                    />
-                    <div className="card-body p-2">
-                      <h6 className="card-title my-2 fw-bold ">
-                        {book.title}
-                      </h6>
-                    </div>
-                  </div>
-                   </div>
-                ))}
-             
-            </div>
-          </section>
+          ))}
         </div>
-      </div>
+      </section>
+
+      {/* How It Works */}
+      <Container className="py-5">
+        <h3 className="mb-4 text-center fw-bold">How It Works</h3>
+        <Row>
+          {[
+            { title: "Browse Books", desc: "Explore thousands of reviews." },
+            { title: "Add Book", desc: "Add books to share review." },
+            { title: "Add Reviews", desc: "Share your thoughts on books." },
+          ].map((step, index) => (
+            <Col key={index} md={4} className="mb-4">
+              <Card className="h-100 text-center shadow-lg border-0 rounded-4 how-card">
+                <Card.Body>
+                  <Card.Title className="fw-bold fs-5">{step.title}</Card.Title>
+                  <Card.Text className="text-muted">{step.desc}</Card.Text>
+                </Card.Body>
+              </Card>
+            </Col>
+          ))}
+        </Row>
+      </Container>
+
+     <Footer/>
     </div>
   );
 }
+
+export default Home;

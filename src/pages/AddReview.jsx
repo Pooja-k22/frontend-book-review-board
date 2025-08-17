@@ -2,10 +2,11 @@ import React, { useContext, useState } from "react";
 import { Modal, Button, Form } from "react-bootstrap";
 import { reviewStatusContext, tokenContext } from "../context/CreateContext";
 import { addReviewApi } from "../services/allApi";
+import { FaTimes } from "react-icons/fa";
 
-const AddReview = ({ show, handleClose ,bookId}) => {
+const AddReview = ({ show, handleClose, bookId }) => {
   const { token } = useContext(tokenContext);
-  const{setreviewAddStatus}= useContext(reviewStatusContext)
+  const { setreviewAddStatus } = useContext(reviewStatusContext);
   const [review, setReview] = useState({
     rating: "",
     comment: "",
@@ -19,14 +20,14 @@ const AddReview = ({ show, handleClose ,bookId}) => {
       const reqHeader = {
         Authorization: `Bearer ${token}`,
       };
-      
-      const result = await addReviewApi({rating,bookId,comment}, reqHeader);
+
+      const result = await addReviewApi({ rating, bookId, comment }, reqHeader);
       console.log(result);
       if (result.status == 200) {
-        setreviewAddStatus(result.data)
+        setreviewAddStatus(result.data);
         alert("review added successfully");
         setReview({ rating: "", comment: "" });
-        
+
         handleClose();
       } else {
         alert("something went wrong");
@@ -36,8 +37,19 @@ const AddReview = ({ show, handleClose ,bookId}) => {
 
   return (
     <Modal show={show} onHide={handleClose} centered>
-      <Modal.Header closeButton>
+      <Modal.Header
+        className=" text-light d-flex justify-content-between align-content-center"
+        style={{ backgroundColor: "rgb(45, 26, 4)" }}
+      >
         <Modal.Title>Add Review</Modal.Title>
+        <Button
+          variant="outline-light"
+          size="sm"
+          onClick={handleClose}
+          style={{ border: "none" }}
+        >
+          <FaTimes />
+        </Button>
       </Modal.Header>
       <Modal.Body>
         <Form>
@@ -68,7 +80,7 @@ const AddReview = ({ show, handleClose ,bookId}) => {
         <Button variant="secondary" onClick={handleClose}>
           Cancel
         </Button>
-        <button  className=" py-2 px-3 bt" onClick={onSubmit}>
+        <button className=" py-2 px-3 bt" onClick={onSubmit}>
           Submit Review
         </button>
       </Modal.Footer>
